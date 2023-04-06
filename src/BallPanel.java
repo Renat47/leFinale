@@ -21,21 +21,27 @@ public class BallPanel extends JPanel{
 
     public BallPanel(Color e)
     {
+        setLayout(new BorderLayout());
+        JPanel wrapperCenterPanel = new JPanel(new BoxLayout());
+        this.add(wrapperCenterPanel, BorderLayout.CENTER);
 
+        this.setPreferredSize(new Dimension(300,300));
         JButton clickButton = new JButton();
         try {
             clickButton.setIcon(new ImageIcon("MonkeUhOh.png"));
         } catch (Exception ex) {
             System.out.println(ex);
         }
+
         clickButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ballArray.add(new Ball());
             }
         });
-        this.add(clickButton);
-        clickButton.setPreferredSize();
+        clickButton.setMaximumSize(new Dimension(100,100));
+        this.add(clickButton, BorderLayout.CENTER);
+
 
         theColor = e;
         setBackground(theColor);
@@ -124,7 +130,7 @@ public class BallPanel extends JPanel{
 
         //super means that you still have methods of original class but you add your method to that list
         oneBall.teleport(this);
-        oneBall.drawSpecialBall(g);
+
 
 
         for(Ball b : ballArray)

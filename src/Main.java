@@ -41,6 +41,7 @@ public class Main
 
 
 
+
         //3.ADD COMPONENTS TO THE PANEL
         //SHOP BUTTON
         JButton shopButton = new JButton("shop");
