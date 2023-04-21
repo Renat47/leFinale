@@ -1,25 +1,37 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+
 public class Ball{
     private int x;
     private int y;
 
     int ballSpeedX = 10;
     int ballSpeedY = 10;
-    private int size = 15;
+    private int size = 50;
     private int speedX = (int)(Math.random()*100)+1;
     private int speedY = (int)(Math.random()*100)+1;
     private Color color;
 
+    private BufferedImage img = new BufferedImage(100,100,BufferedImage.TYPE_INT_ARGB);;
+
 
     public Ball()
     {
+        try {
+            this.img = ImageIO.read(new File("MonkeUhOh.png"));
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
         this.x = (int)(Math.random()*400)+15;
         this.y = (int)(Math.random()*400)+15;
         this.speedX = (int)(Math.random()*2)+1;
         this.speedY = (int)(Math.random()*2)+1;
-        this.size = (int)(Math.random()*15)+5;
-        this.color = new Color((int)(Math.random()*256), (int)(Math.random()*256), (int)(Math.random()*256));
+        this.size = (int)(Math.random()*25)+10;
 
     }
     public Ball(int x, int y, int size, int speedX, int speedY)
@@ -92,8 +104,7 @@ public class Ball{
     // }
     public void drawBall(Graphics cow)
     {
-        cow.setColor(color);
-        cow.fillOval(x,y,size,size);
+        cow.drawImage(img,x,y,size,size,null);
     }
     public void drawSpecialBall(Graphics cow)
     {

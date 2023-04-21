@@ -10,6 +10,8 @@ public class Main
     static double hp = 100000;
     static double damage = 1;
     static int points = 0;
+
+    static JLabel ptsLabel;
     public static void main(String[] args)
     {
 
@@ -24,7 +26,6 @@ public class Main
         //MAIN PANEL
         JPanel myPanel = new JPanel();
         myPanel.setLayout(new BorderLayout());
-        myPanel.setBackground(Color.orange);
         //SHOP PANEL
         JPanel shopPanel = new JPanel();
         shopPanel.setLayout(new BoxLayout(shopPanel, BoxLayout.PAGE_AXIS));
@@ -45,6 +46,7 @@ public class Main
         //3.ADD COMPONENTS TO THE PANEL
         //SHOP BUTTON
         JButton shopButton = new JButton("shop");
+        shopButton.setFont(new Font("SansSerif", Font.BOLD, 22));
         shopButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
@@ -56,11 +58,10 @@ public class Main
 
 
 
-        //HP LABEL
-        JLabel hpLabel = new JLabel();
-        hpLabel.setText(hp + " hp");
+
         //PTS LABEL
-        JLabel ptsLabel = new JLabel();
+        ptsLabel = new JLabel();
+        ptsLabel.setFont(new Font("SansSerif", Font.BOLD, 18));
         ptsLabel.setText(points + " pts");
         //UPGRADE BUTTONS
         JButton upg1Button = new JButton("5 DAMAGE   30pts");
@@ -105,31 +106,42 @@ public class Main
             }
         });
         upg2Button.setSize(50,300);
-        //THE CLICKABLE IMAGE
-        JButton button = new JButton();
-        try {
-            button.setIcon(new ImageIcon("MonkeyUhOh.png"));
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
-        button.addActionListener(new ActionListener(){
+
+        //UPG3
+        JButton upg3Button = new JButton("POISON 1000");
+        upg3Button.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
-                if(hp > 0)
+                if(upg3 == false)
                 {
-                    hp -= damage;
-                    hpLabel.setText(hp + " hp");
-                    points += damage;
-                    ptsLabel.setText(points + " pts");
-                    hpLabel.setBackground(Color.red);
-                }
-                if(hp <= 0)
+                    if (points >= 10)
+                    {
+                        points -= 10;
+                        ptsLabel.setText(points + " pts");
+                        upg3 = true;
+                    }
+                }else
                 {
-                    hpLabel.setText("You won");
+                    System.out.println("Already purchased");
                 }
 
             }
         });
+        upg3Button.setSize(50,300);
+
+
+
+            try{
+                Thread.sleep(20);
+            }
+            catch(Exception e){
+                System.out.println(e);
+            }
+            if(upg3 == true)
+            hp--;
+
+
+
 
 
 
@@ -144,12 +156,15 @@ public class Main
         leftSplitter.add(ptsLabel);
         shopPanel.add(upg1Button);
         shopPanel.add(upg2Button);
+        shopPanel.add(upg3Button);
         leftPanel.add(leftSplitter);
         myPanel.add(leftPanel, BorderLayout.WEST);
 
         myPanel.add(bPanel, BorderLayout.CENTER);
 
-        myPanel.add(hpLabel,BorderLayout.SOUTH);
+        JLabel filler = new JLabel();
+        filler.setPreferredSize(new Dimension(700,50));
+        myPanel.add(filler,BorderLayout.SOUTH);
 
         //4.ADD THE PANEL TO THE FRAME
         main.add(myPanel);
