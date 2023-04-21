@@ -171,6 +171,7 @@ public class Main
         shop.add(shopPanel);
         //5.MAKE THE FRAME VISIBLE
         main.setVisible(true);
+        //comment
 
 
     }

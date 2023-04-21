@@ -10,7 +10,7 @@ import java.util.Timer;
 public class BallPanel extends JPanel{
     private Color theColor;
     static JLabel hpLabel;
-
+//comment
     ArrayList<Ball> ballArray = new ArrayList<Ball>();
     int x = 80;
     int y = 20;

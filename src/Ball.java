@@ -89,7 +89,7 @@ public class Ball{
         {
             speedY *= -1;
         }
-
+//comment
     }
     //public void bounceCheck(JPanel h)
     //
